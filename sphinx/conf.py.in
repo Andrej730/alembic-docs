@@ -29,6 +29,7 @@ extensions = ['sphinx.ext.autodoc', 'sphinx.ext.doctest', 'sphinx.ext.todo',
 
 def get_header_files(path):
     h_files = []
+    assert os.path.exists(path), path
     for (path, dirs, files) in os.walk(path):
         h_files.extend([f for f in files if f.endswith(".h")])
     return h_files
