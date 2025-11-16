@@ -41,7 +41,7 @@ SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${PROJECT_SOURCE_DIR}/cmake)
 if (NOT DOXYGEN_EXECUTABLE)
     find_package( Doxygen REQUIRED )
 endif()
-find_package( PythonInterp REQUIRED )
+find_package( Python REQUIRED COMPONENTS Interpreter )
 find_package( Alembic REQUIRED )
 
 CONFIGURE_FILE (
