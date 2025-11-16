@@ -14,7 +14,7 @@ include a document of conventions for interchange via a reserved "abc" target va
 
 shader type: a string representing a shader classification by name and agreed-upon 
 convention. Examples include "surface," "displacement" and "light." This could also 
-express things like "coshader_taco" in which the value text following the "coshader_" 
+express things like "coshader_taco" in which the value text following the "coshader\_" 
 prefix is used as a coshader instance name.
 
 shader name: a string identifying a shader object within a specified target and shader
