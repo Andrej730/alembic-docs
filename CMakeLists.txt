@@ -34,6 +34,7 @@
 ##-*****************************************************************************
 
 CMAKE_MINIMUM_REQUIRED( VERSION 2.8 )
+project(AlembicDocs)
 
 SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${PROJECT_SOURCE_DIR}/cmake)
 
