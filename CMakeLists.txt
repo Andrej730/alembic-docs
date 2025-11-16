@@ -42,6 +42,12 @@ if (NOT DOXYGEN_EXECUTABLE)
     find_package( Doxygen REQUIRED )
 endif()
 find_package( Python REQUIRED COMPONENTS Interpreter )
+
+# Allow uppercase `ALEMBIC_ROOT` to be passed without warnings.
+# cmake 3.27+
+if(POLICY CMP0144)
+  cmake_policy(SET CMP0144 NEW)
+endif()
 find_package( Alembic REQUIRED )
 
 CONFIGURE_FILE (
