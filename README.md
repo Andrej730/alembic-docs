@@ -4,10 +4,11 @@ The documentation [website](http://docs.alembic.io) for
 
 Requires
 --------
-::
 
-    - sphinx 1.4 (pip install sphinx)
-    - breathe 4.1.0 (pip install breathe)
+- `doxygen` available from PATH
+- `alembic` and `imath` installed as Python modules
+- [`alembic`](https://github.com/alembic/alembic/) installed and available from PATH
+- Python dependencies - can be installed with `pip install -r requirements.txt`
 
 Building
 --------
