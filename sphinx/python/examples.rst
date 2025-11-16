@@ -238,7 +238,7 @@ Reading an Archive
 Read an Alembic archive, also referred to as an :py:class:`.IArchive`. ::
 
     >>> iarch = IArchive('polyMesh1.abc')
-    >>> print "Reading", iarch.getName()
+    >>> print("Reading", iarch.getName())
     Reading polyMesh1.abc
 
 
@@ -339,7 +339,7 @@ adapted from the previous example and we're only bothering to match against the
         md = obj.getMetaData()
         if IPolyMesh.matches(md) or ISubD.matches(md):
             if obj.getName() == name:
-                print "Found it!", obj.getFullName()
+                print("Found it!", obj.getFullName())
                 return
         for childObject in obj.children:
             visitObject(childObject, name)
