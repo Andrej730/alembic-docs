@@ -79,6 +79,7 @@ Our sample output Archive will contain a single animated Transform with a single
 as its child. Because we're creating an :py:class:`.OArchive`, this will create (or clobber) 
 the archive file with this filename: ::
 
+    >>> from alembic.Abc import OArchive
     >>> oarch = OArchive('polyMesh1.abc')
 
 
@@ -103,6 +104,7 @@ An :py:class:`.OPolyMesh` is-an OObject that has-an
 :py:class:`.OPolyMeshSchema`. An OPolyMeshSchema is-an :py:class:`.OCompoundProperty`. In this case, 
 we're parenting the PolyMesh under the Archive's top node and naming it "meshy". ::
 
+    >>> from alembic.AbcGeom import OPolyMesh
     >>> meshObj = OPolyMesh(oarch.getTop(), "meshy")
     >>> mesh = meshyObj.getSchema()
 
@@ -174,16 +176,19 @@ The typed GeomParams have an inner Sample class that is used for setting and get
 according to the type of data they will contain, for example the :py:class:`.OV2fGeomParamSample` is
 used to store V2f data, such as UVs. Continuing our example: ::
 
+    >>> from alembic.AbcGeom import OPolyMeshSchemaSample
     >>> uvsamp = OV2fGeomParamSample(uvs, kFacevaryingScope) 
 
 Normals have their own type. ::
 
+    >>> from alembic.AbcGeom import ON3fGeomParamSample
     >>> nsamp  = ON3fGeomParamSample(normals, kFacevaryingScope)
 
 Create a :py:class:`.OPolyMeshSchemaSample` Sample. We're creating the Sample inline here, but we could 
 create a static sample and leave it around, only modifying the parts that have changed. The first sample
 should contain at least all of the required data for a PolyMesh. :: 
 
+    >>> from alembic.AbcGeom import OPolyMeshSchemaSample
     >>> mesh_samp = OPolyMeshSchemaSample(verts, indices, counts, uvsamp, nsamp)
 
 Make up some bounding box data and set it on the sample. ::
@@ -237,6 +242,7 @@ Reading an Archive
 
 Read an Alembic archive, also referred to as an :py:class:`.IArchive`. ::
 
+    >>> from alembic.Abc import IArchive
     >>> iarch = IArchive('polyMesh1.abc')
     >>> print("Reading", iarch.getName())
     Reading polyMesh1.abc
@@ -263,6 +269,7 @@ called *ABC*. So, in our example: ::
 
 All scene data is parented under this top node. ::
 
+    >>> from alembic.AbcGeom import IPolyMesh
     >>> meshObj = IPolyMesh(top, "meshy")
     >>> mesh = meshObj.getSchema()
     >>> N = mesh.getNormalsParam()
@@ -273,6 +280,7 @@ All scene data is parented under this top node. ::
     If you don't know the object type of the input data, you can check the Object MetaData
     and match it to a specific type. ::
 
+    >>> from alembic.AbcGeom import IPolyMesh, IPolyMeshSchema
     >>> obj = top.children[0]
     >>> if IPolyMeshSchema.matches(obj):
     >>> ... meshObj = IPolyMesh(obj, KWrapExisting)
@@ -335,6 +343,9 @@ adapted from the previous example and we're only bothering to match against the
 
 ::
 
+    from alembic.Abc import IArchive
+    from alembic.AbcGeom import IPolyMesh, ISubD
+
     def visitObject(obj, name):
         md = obj.getMetaData()
         if IPolyMesh.matches(md) or ISubD.matches(md):
@@ -357,6 +368,10 @@ name, we're going to call a new function, :py:func:`getBounds()`.
 
 ::
     
+    import imath
+    from alembic.Abc import IArchive
+    from alembic.AbcGeom import IPolyMesh, ISubD, IXform
+
     gBounds = imath.Box3d()
     gBounds.makeEmpty()
     kWrapExisting = alembic.Abc.WrapExistingFlag.kWrapExisting
@@ -407,6 +422,15 @@ In this example, we'll store some non-standard data in a PolyMesh. This would on
 workflows. Here we need an :py:class:`.OCompoundProperty` to use as the parent of our user Property.
 
 ::
+
+    from alembic.Abc import OArchive
+    from alembic.AbcGeom import (
+        OPolyMesh,
+        OPolyMeshSchemaSample,
+        ODoubleProperty,
+        OP3fGeomParamSample,
+        OInt32GeomParamSample
+    )
 
     archive = OArchive("crazyPolyMesh1.abc")
 
