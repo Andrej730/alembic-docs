@@ -32,6 +32,16 @@
 ## OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ##
 ##-*****************************************************************************
+#
+#
+# Module resulting variables:
+# - `Alembic_FOUND` - `TRUE` if Alembic was found
+# - `ALEMBIC_INCLUDE_PATH` - include directory path
+# - `ALEMBIC_LIB` - path to library
+#
+# Other variables:
+# - `ALEMBIC_ROOT` - installation root folder. Can be provided to hint search paths.
+# Also can be provided as an environment variable.
 
 IF (NOT ALEMBIC_ROOT AND NOT $ENV{ALEMBIC_ROOT} STREQUAL "")
     SET(ALEMBIC_ROOT $ENV{ALEMBIC_ROOT})
