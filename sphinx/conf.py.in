@@ -34,6 +34,12 @@ def get_header_files(path):
         h_files.extend([f for f in files if f.endswith(".h")])
     return h_files
 
+breathe_doxygen_config_options  = {
+    # Expand export macro to nothing for doxygen to succeed.
+    "MACRO_EXPANSION": "YES",
+    "PREDEFINED": "ALEMBIC_EXPORT=",
+}
+
 breathe_projects_source = {
     "Abc": ("@ALEMBIC_INCLUDE_PATH@/Abc",
             get_header_files("@ALEMBIC_INCLUDE_PATH@/Abc")),
