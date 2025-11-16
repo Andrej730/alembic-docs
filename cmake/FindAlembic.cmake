@@ -105,20 +105,22 @@ FIND_LIBRARY(ALEMBIC_LIB Alembic
              DOC "The Alembic library"
 )
 
-SET( ALEMBIC_FOUND TRUE )
-
-IF (${ALEMBIC_INCLUDE_PATH} STREQUAL "ALEMBIC_INCLUDE_PATH-NOTFOUND") 
-    MESSAGE( STATUS "Alembic include path not found" )
-    SET(ALEMBIC_FOUND FALSE)
-ELSE()
+IF(ALEMBIC_INCLUDE_PATH)
     GET_FILENAME_COMPONENT(ALEMBIC_INCLUDE_PATH ${ALEMBIC_INCLUDE_PATH} DIRECTORY)
-    MESSAGE(STATUS "ALEMBIC_INCLUDE_PATH ${ALEMBIC_INCLUDE_PATH}")
+    MESSAGE(STATUS "Alembic include path is found at '${ALEMBIC_INCLUDE_PATH}'")
+ELSE()
+    MESSAGE(STATUS "Alembic include path not found" )
 ENDIF()
 
-IF (${ALEMBIC_LIB} STREQUAL "ALEMBIC_LIB-NOTFOUND") 
-    MESSAGE( STATUS "Alembic library not found" )
-    SET( ALEMBIC_FOUND FALSE )
-    SET( ALEMBIC_LIB NOTFOUND )
+IF(ALEMBIC_LIB)
+    MESSAGE(STATUS "Alembic library is found at '${ALEMBIC_LIB}'")
 ELSE()
-    MESSAGE(STATUS "ALEMBIC_LIB ${ALEMBIC_LIB}")
+    MESSAGE(STATUS "Alembic library not found" )
 ENDIF()
+
+include(FindPackageHandleStandardArgs)
+
+find_package_handle_standard_args(
+    Alembic
+    REQUIRED_VARS ALEMBIC_INCLUDE_PATH ALEMBIC_LIB
+)
