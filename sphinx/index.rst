@@ -16,6 +16,12 @@ that result from an arbitrarily complex animation and simulation process, but wi
 attempt to store a representation of the network of computations (rigs, basically) which
 were required to produce the final, animated vertex positions and animated transforms.
 
+.. toctree::
+   :maxdepth: 2
+   :hidden:
+
+   python/examples
+   reference/index
 
 Get Alembic
 -----------
